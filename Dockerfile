@@ -9,14 +9,11 @@ WORKDIR /app
 COPY package*.json ./
 COPY tsconfig.json ./
 
-# Install dependencies
-RUN npm ci
-
-# Copy source code
+# Copy source code (before npm ci to avoid postinstall error)
 COPY src ./src
 
-# Build TypeScript
-RUN npm run build
+# Install dependencies (postinstall will run build)
+RUN npm ci
 
 # Production stage
 FROM node:22-alpine
