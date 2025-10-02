@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  openbd-mcp-server:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: openbd-mcp-server
+    restart: unless-stopped
+    # For stdio-based MCP, use stdin_open and tty
+    stdin_open: true
+    tty: true
+    # For HTTP-based MCP, uncomment ports
+    # ports:
+    #   - "3000:3000"
+    # environment:
+    #   - NODE_ENV=production
+    # Optional: mount volume for logs
+    # volumes:
+    #   - ./logs:/app/logs

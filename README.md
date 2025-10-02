@@ -2,6 +2,68 @@
 
 OpenBD（オープンビーディー）の書籍データベースにアクセスするためのMCP（Model Context Protocol）サーバーです。日本の書籍の書誌情報と書影を、AI Agentが効率的に取得できるようにします。
 
+## インストール
+
+### NPMから直接実行（推奨）
+
+```bash
+npx openbd-mcp-server
+```
+
+### Dockerコンテナとして実行
+
+```bash
+# イメージのビルド
+docker build -t openbd-mcp-server .
+
+# コンテナの実行
+docker run -i openbd-mcp-server
+```
+
+### ソースからビルド
+
+```bash
+# リポジトリのクローン
+git clone https://github.com/your-username/openbd-mcp-server.git
+cd openbd-mcp-server
+
+# 依存関係のインストールとビルド
+npm install
+
+# サーバーの起動
+npm start
+```
+
+## 使い方
+
+### Claude Desktop での設定
+
+`~/Library/Application Support/Claude/claude_desktop_config.json` に以下を追加:
+
+```json
+{
+  "mcpServers": {
+    "openbd": {
+      "command": "npx",
+      "args": ["openbd-mcp-server"]
+    }
+  }
+}
+```
+
+### Docker を使用する場合
+
+```json
+{
+  "mcpServers": {
+    "openbd": {
+      "command": "docker",
+      "args": ["run", "-i", "openbd-mcp-server"]
+    }
+  }
+}
+```
+
 ## 概要
 
 OpenBD MCP Serverは、[OpenBD API](https://openbd.jp)を通じて約163万件の日本の書籍データにアクセスできるMCPサーバーです。ISBNコードから書籍の詳細情報、書影、在庫状況などを取得できます。
