@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "openbd": {
+      "command": "node",
+      "args": ["dist/index.js"]
+    }
+  }
+}
