@@ -12,6 +12,7 @@
     "test": "NODE_OPTIONS=--experimental-vm-modules jest",
     "test:watch": "NODE_OPTIONS=--experimental-vm-modules jest --watch",
     "test:coverage": "NODE_OPTIONS=--experimental-vm-modules jest --coverage",
+    "inspector": "npx @modelcontextprotocol/inspector node dist/index.js",
     "docker:build": "docker build -t openbd-mcp-server .",
     "docker:run": "docker run -i openbd-mcp-server",
     "docker:compose:up": "docker-compose up -d",

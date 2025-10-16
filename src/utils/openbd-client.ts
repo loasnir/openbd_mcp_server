@@ -103,16 +103,25 @@ export class OpenBDClient {
   async getCoverage(): Promise<OpenBDCoverageResponse> {
     const url = `${this.baseUrl}/coverage`;
 
-    const response = await fetch(url, {
-      method: 'GET',
-      headers: {
-        'Accept': 'application/json',
-      },
-    });
+    // タイムアウト60秒に設定（大容量レスポンス対応）
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 60000);
 
-    const data = await response.json() as OpenBDCoverageResponse;
+    try {
+      const response = await fetch(url, {
+        method: 'GET',
+        headers: {
+          'Accept': 'application/json',
+        },
+        signal: controller.signal,
+      });
 
-    return data;
+      const data = await response.json() as OpenBDCoverageResponse;
+
+      return data;
+    } finally {
+      clearTimeout(timeoutId);
+    }
   }
 
   /**
